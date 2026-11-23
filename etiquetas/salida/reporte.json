@@ -4,7 +4,8 @@
     "medida_mm": "170 x 65",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 16,
+    "espacioTabla": "44 × 32 mm",
+    "pendientes": 9,
     "nombrePt": 16.4
   },
   {
@@ -12,7 +13,8 @@
     "medida_mm": "180 x 95",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 23,
+    "espacioTabla": "47 × 48 mm",
+    "pendientes": 9,
     "nombrePt": 37.5
   },
   {
@@ -20,7 +22,8 @@
     "medida_mm": "175 x 70",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 15,
+    "espacioTabla": "45 × 35 mm",
+    "pendientes": 9,
     "nombrePt": 36.4
   },
   {
@@ -28,7 +31,8 @@
     "medida_mm": "190 x 80",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 11,
+    "espacioTabla": "49 × 40 mm",
+    "pendientes": 9,
     "nombrePt": 39.5
   },
   {
@@ -36,7 +40,8 @@
     "medida_mm": "160 x 60",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 12,
+    "espacioTabla": "41 × 29 mm",
+    "pendientes": 9,
     "nombrePt": 26.3
   },
   {
@@ -44,7 +49,8 @@
     "medida_mm": "160 x 60",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 14,
+    "espacioTabla": "41 × 29 mm",
+    "pendientes": 10,
     "nombrePt": 28.8
   },
   {
@@ -52,7 +58,8 @@
     "medida_mm": "240 x 150",
     "formato": "bolsa",
     "avisos": [],
-    "pendientes": 23,
+    "espacioTabla": "53 × 85 mm",
+    "pendientes": 10,
     "nombrePt": 58.3
   },
   {
@@ -60,7 +67,8 @@
     "medida_mm": "240 x 150",
     "formato": "bolsa",
     "avisos": [],
-    "pendientes": 22,
+    "espacioTabla": "53 × 84 mm",
+    "pendientes": 11,
     "nombrePt": 58.3
   },
   {
@@ -68,7 +76,8 @@
     "medida_mm": "200 x 90",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 17,
+    "espacioTabla": "52 × 45 mm",
+    "pendientes": 11,
     "nombrePt": 41.6
   },
   {
@@ -76,7 +85,8 @@
     "medida_mm": "170 x 65",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 13,
+    "espacioTabla": "44 × 32 mm",
+    "pendientes": 11,
     "nombrePt": 35.4
   },
   {
@@ -84,7 +94,8 @@
     "medida_mm": "170 x 65",
     "formato": "envolvente",
     "avisos": [],
-    "pendientes": 15,
+    "espacioTabla": "44 × 32 mm",
+    "pendientes": 9,
     "nombrePt": 35.4
   },
   {
@@ -94,7 +105,8 @@
     "avisos": [
       "Panel 2: texto legal a 5.8 pt (revisar legibilidad)"
     ],
-    "pendientes": 21,
+    "espacioTabla": "44 × 32 mm",
+    "pendientes": 14,
     "nombrePt": 29.9
   }
 ]

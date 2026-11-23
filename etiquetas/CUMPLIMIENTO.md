@@ -22,7 +22,7 @@
 4. **Todo en español.** "Dietary supplement", "Capsules", "Root powder" e "IU" pasan a "Suplemento alimenticio", "cápsulas", "raíz en polvo" y "UI".
 5. **Denominación genérica visible:** "Suplemento alimenticio de …" en el panel principal y en el reverso.
 6. **Contenido neto** en el panel principal, con unidades correctas: "g" y no "grs"; "mL".
-7. **Información nutrimental** con porción, porciones por envase, contenido por porción y % VNR.
+7. **Espacio reservado para la información nutrimental.** La tabla la coloca el cliente en el recuadro punteado; su medida viene en `salida/reporte.json` y en las notas de cada PowerPoint. Debe incluir porción, porciones por envase, contenido por porción y % VNR.
 8. **Leyendas obligatorias** en mayúsculas y dentro de un recuadro.
 9. **Modo de empleo, precauciones, conservación y "Manténgase fuera del alcance de los niños".**
 10. **Responsable del producto, fabricante, país de origen, espacio para lote y caducidad (para inkjet) y código de barras.**
@@ -53,7 +53,7 @@ Comunes a todas:
 - **Código de barras EAN-13** (GS1 México).
 - Lote y caducidad: se dejó el espacio para imprimirlos con inkjet en la línea de envasado.
 
-De cada producto: dosis, cantidades por porción, % VNR, excipientes y material de la cápsula. **Salen de la ficha técnica del fabricante; no se inventaron.** Para ver cuántos faltan por producto, corre `node generar.mjs`, que los cuenta. También quedan en `salida/reporte.json`.
+De cada producto: dosis, excipientes y material de la cápsula. Las cantidades por porción y el % VNR van en la tabla nutrimental que colocas tú. **Salen de la ficha técnica del fabricante; no se inventaron.** Para ver cuántos faltan por producto, corre `node generar.mjs`, que los cuenta. También quedan en `salida/reporte.json`.
 
 ## Antes de mandar a imprimir
 

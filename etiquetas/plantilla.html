@@ -52,7 +52,7 @@
     background: var(--acento); padding: .6mm 3mm; border-radius: .8mm;
     clip-path: polygon(0 0, 100% 0, 97% 50%, 100% 100%, 0 100%, 3% 50%);
   }
-  .sin-tarjeta .cinta { color: var(--fondo); }
+  .sin-tarjeta .cinta, .acento-claro .cinta { color: var(--fondo); }
 
   .nombre { color: var(--titulo); line-height: .92; white-space: nowrap; }
   .estilo-slab .nombre { font-family: 'Alfa Slab One', serif;
@@ -116,6 +116,19 @@
   .barras { width: 20mm; min-height: 9mm; border: .25mm dashed var(--tinta); border-radius: .6mm;
     display: grid; place-items: center; text-align: center; font-size: .85em; opacity: .75; }
 
+  /* Recuadro reservado para la tabla nutrimental (la coloca el cliente) */
+  .espacio-tabla { border: .35mm dashed var(--tinta); border-radius: .8mm; background: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    margin-bottom: 1.2mm; color: var(--tinta); opacity: .9; }
+  .espacio-tabla b { font-weight: 800; text-transform: uppercase; letter-spacing: .2mm; }
+  .espacio-tabla span { font-size: .9em; }
+
+  /* Modo "solo fondo": arte sin textos, para el archivo editable */
+  .solo-fondo .etiqueta *, .solo-fondo .etiqueta *::before { color: transparent !important; text-shadow: none !important;
+    -webkit-text-stroke: 0 !important; }
+  .solo-fondo .pend { background: none !important; outline: none !important; }
+  .solo-fondo .espacio-tabla { visibility: hidden; }
+
   /* Datos que faltan: resaltados para que no se impriman por error */
   .pend { background: #ffe0f2; color: #c2006b; outline: .2mm dashed #e6007e; border-radius: .4mm; padding: 0 .4mm;
     font-weight: 700; font-style: normal; text-transform: none; }
@@ -141,6 +154,7 @@ window.__renderizar = function () {
     return .2126 * r + .7152 * g + .0722 * b; };
   const sinTarjeta = luminancia(t.titulo) > .8;           // título blanco: va directo sobre el fondo
   const temaOscuro = luminancia(t.fondo) < .08;
+  const acentoClaro = luminancia(t.acento) > .45;      // cinta clara: texto oscuro
 
   /* ---------- Motivos ilustrados (vector, sin alusiones terapéuticas) ---------- */
   const hoja = (x, y, r, s, c, o = 1) =>
@@ -200,15 +214,9 @@ window.__renderizar = function () {
       <path d="M8 8.4 Q 20 6 32 8.4" stroke="${c}" stroke-width=".6" fill="none"/></svg>`;
 
   /* ---------- Bloques de texto ---------- */
-  const tabla = () => `
-    <table class="nut"><caption>Información nutrimental</caption>
-      <tr class="porcion"><td colspan="3">Porción: ${txt(p.porcion)} · Porciones por envase: ${txt(p.porciones)}</td></tr>
-      <tr><th>Contenido</th><th>Por porción</th><th>% VNR</th></tr>
-      ${p.nutrimental.map(([n, c, v]) => `<tr><td class="${n.startsWith('   ') ? 'sub' : ''}">${txt(n.trim())}</td><td>${txt(c)}</td><td>${txt(v)}</td></tr>`).join('')}
-    </table>
-    ${p.nota_tabla ? `<p class="nota">${txt(p.nota_tabla)} VNR: Valor Nutrimental de Referencia.</p>` : `<p class="nota">VNR: Valor Nutrimental de Referencia.</p>`}`;
+  const espacioTabla = () => `<div class="espacio-tabla"><b>Espacio para tabla nutrimental</b><span class="medida"></span></div>`;
 
-  const bloqueIzq = () => `${tabla()}
+  const bloqueIzq = () => `${espacioTabla()}
     <h3>Ingredientes</h3><p>${txt(p.ingredientes)}</p>
     <p class="legal">${txt(comun.conservacion)}</p>
     <p class="legal">${txt(comun.contacto)}</p>`;
@@ -235,7 +243,7 @@ window.__renderizar = function () {
       </div>
     </section>`;
 
-  const clases = ['etiqueta', p.formato, `estilo-${t.estilo}`, sinTarjeta ? 'sin-tarjeta' : '', temaOscuro ? 'tema-oscuro' : '', guias ? 'guias' : ''].join(' ');
+  const clases = ['etiqueta', p.formato, `estilo-${t.estilo}`, sinTarjeta ? 'sin-tarjeta' : '', temaOscuro ? 'tema-oscuro' : '', acentoClaro ? 'acento-claro' : '', guias ? 'guias' : ''].join(' ');
   const vars = `--w:${p.ancho};--h:${p.alto};--fondo:${t.fondo};--fondo2:${t.fondo2};--panel:${t.panel};--acento:${t.acento};--acento2:${t.acento2};--titulo:${t.titulo};--tinta:${t.tinta}`;
 
   document.getElementById('raiz').innerHTML = p.formato === 'bolsa'
@@ -246,6 +254,7 @@ window.__renderizar = function () {
          <section class="info"><div class="fit">${bloqueDer()}</div></section></div>`;
 
   /* ---------- Ajustes de tamaño ---------- */
+  const MM_PX = 96 / 25.4;
   const pr = document.querySelector('.principal');
   const anchoMm = pr.getBoundingClientRect().width / (96 / 25.4), altoMm = pr.getBoundingClientRect().height / (96 / 25.4);
   const lienzo = document.getElementById('lienzo');
@@ -263,6 +272,12 @@ window.__renderizar = function () {
   let fs = 34 * k; nombre.style.fontSize = fs + 'pt';
   while ((nombre.scrollWidth > maxW || tarjeta.scrollHeight > pr.clientHeight - 6) && fs > 8) { fs -= .5; nombre.style.fontSize = fs + 'pt'; }
 
+  // Recuadro de la tabla: altura fija en mm según el formato
+  const espacio = document.querySelector('.espacio-tabla');
+  const fitIzq = espacio.closest('.fit');
+  const altoEspacio = Math.floor(fitIzq.clientHeight * (p.formato === 'bolsa' ? .56 : .52) / MM_PX);
+  espacio.style.height = altoEspacio + 'mm';
+
   // Reduce el texto legal hasta que quepa, sin bajar de 5.5 pt
   const avisos = [];
   document.querySelectorAll('.fit').forEach((el, i) => {
@@ -272,8 +287,64 @@ window.__renderizar = function () {
     else if (f < 6) avisos.push(`Panel ${i + 1}: texto legal a ${f.toFixed(1)} pt (revisar legibilidad)`);
   });
   if (tarjeta.scrollHeight > pr.clientHeight) avisos.push('Panel principal: el contenido no cabe');
+  const anchoEspacio = Math.floor(espacio.getBoundingClientRect().width / MM_PX);
+  espacio.querySelector('.medida').textContent = `${anchoEspacio} × ${altoEspacio} mm`;
 
-  return { avisos, pendientes: document.querySelectorAll('.pend').length, nombrePt: +fs.toFixed(1) };
+  return { avisos, espacioTabla: `${anchoEspacio} × ${altoEspacio} mm`, pendientes: document.querySelectorAll('.pend').length, nombrePt: +fs.toFixed(1) };
+};
+// Devuelve cada bloque de texto con su caja (mm, relativa a la etiqueta) y sus tramos con estilo,
+// para reconstruirlos como cuadros de texto editables en PowerPoint.
+window.__extraer = function () {
+  const et = document.querySelector('.etiqueta');
+  const R = et.getBoundingClientRect();
+  const MM = 25.4 / 96;
+  const hex = c => { const m = c.match(/\d+(\.\d+)?/g); if (!m) return '000000';
+    return m.slice(0, 3).map(v => (+v).toString(16).padStart(2, '0')).join('').toUpperCase(); };
+  const estilo = el => { const cs = getComputedStyle(el);
+    return { familia: cs.fontFamily.split(',')[0].replace(/['"]/g, '').trim(), peso: +cs.fontWeight,
+      italica: cs.fontStyle === 'italic', pt: +(parseFloat(cs.fontSize) * .75).toFixed(2), color: hex(cs.color),
+      mayus: cs.textTransform === 'uppercase', espaciado: +(parseFloat(cs.letterSpacing) * .75 || 0).toFixed(2),
+      pendiente: !!el.closest('.pend') }; };
+  const caja = el => { const cs = getComputedStyle(el);
+    let r = el.getBoundingClientRect();
+    if (el.classList.contains('sello')) {   // caja sin rotar, centrada en el mismo punto
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      r = { left: cx - el.offsetWidth / 2, top: cy - el.offsetHeight / 2, width: el.offsetWidth, height: el.offsetHeight };
+    }
+    const pl = parseFloat(cs.paddingLeft), pr = parseFloat(cs.paddingRight), pt = parseFloat(cs.paddingTop), pb = parseFloat(cs.paddingBottom);
+    return { x: (r.left - R.left + pl) * MM, y: (r.top - R.top + pt) * MM, w: (r.width - pl - pr) * MM, h: (r.height - pt - pb) * MM }; };
+
+  const sel = '.marca, .tipo, .cinta, .nombre, .subnombre, .extra, .contenido, .sello, .fit h3, .fit > p, .leyendas, .lote .campos > div, .barras';
+  const bloques = [...et.querySelectorAll(sel)].map(el => {
+    const cs = getComputedStyle(el);
+    const tramos = [];
+    const recorrer = nodo => { for (const n of nodo.childNodes) {
+      if (n.nodeType === 3) { const e = estilo(n.parentElement); let t = n.textContent.replace(/\s+/g, ' ');
+        if (e.mayus) t = t.toUpperCase(); if (t) tramos.push({ texto: t, ...e }); }
+      else if (n.tagName === 'BR') tramos.push({ salto: true });
+      else if (n.nodeType === 1) recorrer(n); } };
+    recorrer(el);
+    // recortar espacios al inicio/fin de cada línea
+    for (let i = 0; i < tramos.length; i++) {
+      const prev = tramos[i - 1], sig = tramos[i + 1], t = tramos[i];
+      if (t.salto) continue;
+      if (!prev || prev.salto) t.texto = t.texto.replace(/^ /, '');
+      if (!sig || sig.salto) t.texto = t.texto.replace(/ $/, '');
+    }
+    const lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2;
+    const c = caja(el);
+    return { clase: el.className || el.tagName.toLowerCase(), ...c,
+      alinear: ['center', 'right'].includes(cs.textAlign) ? cs.textAlign : 'left',
+      interlineado: +(lh * .75).toFixed(2), unaLinea: el.getBoundingClientRect().height < lh * 1.6,
+      sombra: cs.textShadow !== 'none' ? cs.textShadow : null,
+      contorno: parseFloat(cs.webkitTextStrokeWidth) > 0 ? { mm: parseFloat(cs.webkitTextStrokeWidth) * MM, color: hex(cs.webkitTextStrokeColor) } : null,
+      rotacion: el.classList.contains('sello') ? 12 : 0,
+      centrarV: el.classList.contains('sello'),
+      tramos: tramos.filter(t => t.salto || t.texto) };
+  });
+  const esp = document.querySelector('.espacio-tabla');
+  return { ancho: R.width * MM, alto: R.height * MM, bloques,
+    espacioTabla: { ...caja(esp), tinta: hex(getComputedStyle(esp).color), medida: esp.querySelector('.medida').textContent } };
 };
 </script>
 </body>
