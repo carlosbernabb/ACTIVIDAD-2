@@ -1,0 +1,100 @@
+[
+  {
+    "id": "00-cloruro-de-magnesio",
+    "medida_mm": "170 x 65",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 16,
+    "nombrePt": 16.4
+  },
+  {
+    "id": "01-finex",
+    "medida_mm": "180 x 95",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 23,
+    "nombrePt": 37.5
+  },
+  {
+    "id": "02-omega-3",
+    "medida_mm": "175 x 70",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 15,
+    "nombrePt": 36.4
+  },
+  {
+    "id": "03-storm",
+    "medida_mm": "190 x 80",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 11,
+    "nombrePt": 39.5
+  },
+  {
+    "id": "04-ashwagandha",
+    "medida_mm": "160 x 60",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 12,
+    "nombrePt": 26.3
+  },
+  {
+    "id": "05-vitamina-e",
+    "medida_mm": "160 x 60",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 14,
+    "nombrePt": 28.8
+  },
+  {
+    "id": "06-colageno-hidrolizado",
+    "medida_mm": "240 x 150",
+    "formato": "bolsa",
+    "avisos": [],
+    "pendientes": 23,
+    "nombrePt": 58.3
+  },
+  {
+    "id": "07-colageno-plus",
+    "medida_mm": "240 x 150",
+    "formato": "bolsa",
+    "avisos": [],
+    "pendientes": 22,
+    "nombrePt": 58.3
+  },
+  {
+    "id": "08-clorofila",
+    "medida_mm": "200 x 90",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 17,
+    "nombrePt": 41.6
+  },
+  {
+    "id": "09-l-arginina",
+    "medida_mm": "170 x 65",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 13,
+    "nombrePt": 35.4
+  },
+  {
+    "id": "10-spirulina",
+    "medida_mm": "170 x 65",
+    "formato": "envolvente",
+    "avisos": [],
+    "pendientes": 15,
+    "nombrePt": 35.4
+  },
+  {
+    "id": "11-melatonina",
+    "medida_mm": "170 x 65",
+    "formato": "envolvente",
+    "avisos": [
+      "Panel 2: texto legal a 5.8 pt (revisar legibilidad)"
+    ],
+    "pendientes": 21,
+    "nombrePt": 29.9
+  }
+]

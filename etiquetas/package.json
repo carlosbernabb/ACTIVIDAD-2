@@ -1,0 +1,13 @@
+{
+  "name": "etiquetas-naturalezam",
+  "private": true,
+  "type": "module",
+  "description": "Generador de etiquetas Naturalezam a tamaño real (PDF + PNG)",
+  "scripts": {
+    "generar": "node generar.mjs",
+    "guias": "node generar.mjs --guias"
+  },
+  "devDependencies": {
+    "playwright": "^1.47.0"
+  }
+}
