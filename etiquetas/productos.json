@@ -1,0 +1,294 @@
+{
+  "_leeme": "Textos de cada etiqueta. Todo lo que va entre [[ ]] es un dato que falta y se imprime resaltado en magenta para que nadie lo mande a imprenta sin completarlo. Tamaños en milímetros.",
+
+  "comun": {
+    "responsable": "Envasado para: [[Razón social]] · RFC [[RFC]] · Hidalgo Sur 25, Col. Centro, C.P. [[C.P.]], Zamora, Michoacán, México.",
+    "fabricante": "Fabricado por: [[Nombre y domicilio del fabricante]]",
+    "origen": "Hecho en [[México / país de origen]]",
+    "contacto": "Atención a clientes: WhatsApp 442 109 6694 · naturalezam.com",
+    "leyendas": [
+      "ESTE PRODUCTO NO ES UN MEDICAMENTO.",
+      "EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIEN LO RECOMIENDA Y DE QUIEN LO USA."
+    ],
+    "conservacion": "Consérvese en lugar fresco y seco, protegido de la luz. Ciérrese bien después de usarse. Manténgase fuera del alcance de los niños.",
+    "no_exceder": "No exceda el consumo recomendado."
+  },
+
+  "productos": [
+    {
+      "id": "00-cloruro-de-magnesio",
+      "handle": "cloruro-de-magnesio-100-caps",
+      "formato": "envolvente", "ancho": 170, "alto": 65,
+      "tema": { "fondo": "#3a2a8c", "fondo2": "#7a3fb8", "panel": "#fff8e8", "acento": "#f4891f", "acento2": "#ffd23f", "titulo": "#c8102e", "tinta": "#2a1a5e", "motivo": "cristales", "estilo": "slab" },
+      "cinta": "TRIPLE MAGNESIO",
+      "nombre": "Cloruro de Magnesio",
+      "subnombre": "con citrato y malato de magnesio",
+      "denominacion": "Suplemento alimenticio de cloruro, citrato y malato de magnesio",
+      "contenido": "Contenido neto: 100 cápsulas de 500 mg c/u",
+      "porcion": "[[n]] cápsula(s)", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Magnesio total", "[[mg]]", "[[%]]"],
+        ["   de cloruro de magnesio", "[[mg]]", ""],
+        ["   de citrato de magnesio", "[[mg]]", ""],
+        ["   de malato de magnesio", "[[mg]]", ""]
+      ],
+      "ingredientes": "Cloruro de magnesio, citrato de magnesio, malato de magnesio, [[excipientes]]. Cápsula: [[gelatina / vegetal, colorantes]].",
+      "modo": "Tomar [[n]] cápsula(s) al día con un vaso de agua.",
+      "precauciones": "Si tiene problemas de riñón, está embarazada o en lactancia, o toma medicamentos, consulte a su médico antes de consumirlo."
+    },
+    {
+      "id": "01-finex",
+      "handle": "finex-dol-naturalezam-30-caps",
+      "formato": "envolvente", "ancho": 180, "alto": 95,
+      "tema": { "fondo": "#2e7d32", "fondo2": "#8bc34a", "panel": "#f4f1fb", "acento": "#1e88e5", "acento2": "#e53935", "titulo": "#6b4c9a", "tinta": "#24402a", "motivo": "diana", "estilo": "slab" },
+      "sello": "Nueva presentación",
+      "nombre": "Finex",
+      "subnombre": "Glucosamina + Colágeno",
+      "linea_extra": "Con condroitina, cúrcuma y plantas tradicionales mexicanas",
+      "denominacion": "Suplemento alimenticio de glucosamina, condroitina y colágeno con extractos vegetales",
+      "contenido": "Contenido neto: 30 tabletas de [[mg]] c/u",
+      "porcion": "1 tableta", "porciones": "30",
+      "nutrimental": [
+        ["Glucosamina", "[[mg]]", "*"],
+        ["Condroitina", "[[mg]]", "*"],
+        ["Colágeno", "[[mg]]", "*"],
+        ["Cartílago de tiburón", "[[mg]]", "*"],
+        ["Magnesio", "[[mg]]", "[[%]]"],
+        ["Calcio", "[[mg]]", "[[%]]"],
+        ["Vitamina C", "[[mg]]", "[[%]]"],
+        ["Vitamina E", "[[mg]]", "[[%]]"],
+        ["Extracto de cúrcuma", "[[mg]]", "*"],
+        ["Extractos vegetales**", "[[mg]]", "*"]
+      ],
+      "nota_tabla": "* VNR no establecido. ** Guásima, encino, cancerina, matarique, sauce blanco y ortiga.",
+      "ingredientes": "Glucosamina, condroitina, colágeno, cartílago de tiburón, magnesio, calcio, vitamina C, vitamina E, extracto de cúrcuma, guásima, encino, cancerina, matarique, sauce blanco, ortiga, [[excipientes]].",
+      "modo": "Tomar 1 tableta al día con un vaso de agua.",
+      "precauciones": "Contiene derivados de crustáceos y pescado [[confirmar origen de glucosamina y colágeno]]. No se recomienda en embarazo, lactancia ni en menores de edad. Si toma medicamentos o tiene alguna condición de salud, consulte a su médico."
+    },
+    {
+      "id": "02-omega-3",
+      "handle": "omega-3-naturalezam-100-caps",
+      "formato": "envolvente", "ancho": 175, "alto": 70,
+      "tema": { "fondo": "#ffd400", "fondo2": "#ffe866", "panel": "#ffffff", "acento": "#f26a1b", "acento2": "#1565c0", "titulo": "#d7261e", "tinta": "#4a2a00", "motivo": "pez", "estilo": "slab" },
+      "nombre": "Omega-3",
+      "subnombre": "Aceite de salmón de Alaska",
+      "linea_extra": "Fuente de EPA y DHA",
+      "denominacion": "Suplemento alimenticio de aceite de salmón de Alaska",
+      "contenido": "Contenido neto: 100 cápsulas blandas de 1000 mg c/u",
+      "porcion": "[[n]] cápsula(s) blanda(s)", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Aceite de salmón", "[[mg]]", "*"],
+        ["Ácidos grasos omega 3", "[[mg]]", "*"],
+        ["   EPA", "[[mg]]", "*"],
+        ["   DHA", "[[mg]]", "*"]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "Aceite de salmón de Alaska. Cápsula blanda: [[gelatina, glicerina, agua]]. [[Antioxidante, si lleva]].",
+      "modo": "Tomar [[n]] cápsula(s) blanda(s) al día, de preferencia con alimentos.",
+      "precauciones": "Contiene pescado. Si toma anticoagulantes, está embarazada o en lactancia, o tiene alguna condición de salud, consulte a su médico."
+    },
+    {
+      "id": "03-storm",
+      "handle": "testostorm-90-caps-1000mg",
+      "formato": "envolvente", "ancho": 190, "alto": 80,
+      "tema": { "fondo": "#111614", "fondo2": "#1f4d36", "panel": "#f5f3ee", "acento": "#ffffff", "acento2": "#c9d6cf", "titulo": "#ffffff", "tinta": "#111614", "motivo": "rayo", "estilo": "condensada" },
+      "nombre": "Storm",
+      "subnombre": "Fórmula para hombre",
+      "linea_extra": "Tribulus · Maca · Ginseng rojo · Zinc",
+      "nota_nombre": "Antes TestoStorm",
+      "denominacion": "Suplemento alimenticio de extractos vegetales con zinc y magnesio",
+      "contenido": "Contenido neto: 90 cápsulas de 1000 mg c/u",
+      "porcion": "1 cápsula", "porciones": "90",
+      "nutrimental": [
+        ["Tribulus terrestris (fruto)", "300 mg", "*"],
+        ["Maca andina (raíz)", "250 mg", "*"],
+        ["Ginseng rojo", "200 mg", "*"],
+        ["Magnesio", "33 mg", "[[%]]"],
+        ["Ácido D-aspártico", "30 mg", "*"],
+        ["Ashwagandha (raíz)", "20 mg", "*"],
+        ["Fenogreco (semilla)", "20 mg", "*"],
+        ["Zinc (como citrato de zinc)", "5 mg", "[[%]]"]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "Tribulus terrestris (fruto), maca andina (raíz), ginseng rojo, [[fuente de magnesio]], ácido D-aspártico, ashwagandha (raíz), fenogreco (semilla), citrato de zinc, [[excipientes]]. Cápsula: [[gelatina / vegetal]].",
+      "modo": "Tomar 1 cápsula al día con un vaso de agua.",
+      "precauciones": "Producto para adultos. No se recomienda en mujeres embarazadas o en lactancia. Si toma medicamentos o tiene alguna condición de salud, consulte a su médico."
+    },
+    {
+      "id": "04-ashwagandha",
+      "handle": "ashwagandha-100-caps-500-mg",
+      "formato": "envolvente", "ancho": 160, "alto": 60,
+      "tema": { "fondo": "#c9a46a", "fondo2": "#e3c896", "panel": "#f6ead2", "acento": "#3f6b2a", "acento2": "#b8862b", "titulo": "#8b1e2d", "tinta": "#3d2412", "motivo": "loto", "estilo": "serif" },
+      "nombre": "Ashwagandha",
+      "subnombre": "Raíz en polvo",
+      "linea_extra": "Withania somnifera",
+      "denominacion": "Suplemento alimenticio de raíz de ashwagandha en polvo",
+      "contenido": "Contenido neto: 100 cápsulas de 500 mg c/u",
+      "porcion": "[[n]] cápsula(s)", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Raíz de ashwagandha en polvo", "[[mg]]", "*"]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "Raíz de ashwagandha (Withania somnifera) en polvo, [[excipientes]]. Cápsula: [[gelatina / vegetal]].",
+      "modo": "Tomar [[n]] cápsula(s) al día con un vaso de agua.",
+      "precauciones": "No se recomienda en embarazo o lactancia. Si toma medicamentos o tiene problemas de tiroides, consulte a su médico."
+    },
+    {
+      "id": "05-vitamina-e",
+      "handle": "vitamina-e-naturalezam-100-caps",
+      "formato": "envolvente", "ancho": 160, "alto": 60,
+      "tema": { "fondo": "#f5c400", "fondo2": "#fff3b0", "panel": "#fffbea", "acento": "#3f8a2e", "acento2": "#c58b00", "titulo": "#7a4a12", "tinta": "#3d2608", "motivo": "gota", "estilo": "slab" },
+      "nombre": "Vitamina E",
+      "subnombre": "Cápsulas blandas",
+      "denominacion": "Suplemento alimenticio de vitamina E",
+      "contenido": "Contenido neto: 100 cápsulas blandas de 500 mg c/u",
+      "porcion": "[[n]] cápsula(s) blanda(s)", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Vitamina E", "[[mg / UI]]", "[[%]]"]
+      ],
+      "ingredientes": "Vitamina E ([[forma: d-alfa / dl-alfa tocoferol]]), [[aceite vehículo]]. Cápsula blanda: [[gelatina, glicerina, agua]].",
+      "modo": "Tomar [[n]] cápsula(s) blanda(s) al día con alimentos.",
+      "precauciones": "Si toma anticoagulantes, está embarazada o en lactancia, consulte a su médico."
+    },
+    {
+      "id": "06-colageno-hidrolizado",
+      "handle": "colageno-hidrolizado-puro-naturalezam-250-g",
+      "formato": "bolsa", "ancho": 240, "alto": 150,
+      "tema": { "fondo": "#7b1e4f", "fondo2": "#c2185b", "panel": "#ffffff", "acento": "#f8bbd0", "acento2": "#8fd3f4", "titulo": "#7b1e4f", "tinta": "#3a0f26", "motivo": "burbujas", "estilo": "slab" },
+      "cinta": "SUPLEMENTO ALIMENTICIO",
+      "nombre": "Colágeno",
+      "subnombre": "Hidrolizado",
+      "linea_extra": "Con magnesio y ácido hialurónico · Sin sabor",
+      "denominacion": "Suplemento alimenticio en polvo de colágeno hidrolizado con magnesio y ácido hialurónico",
+      "contenido": "Contenido neto: 250 g",
+      "porcion": "[[g]] ([[n]] cucharada medidora)", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Contenido energético", "[[kcal]]", ""],
+        ["Proteínas", "[[g]]", ""],
+        ["Grasas totales", "[[g]]", ""],
+        ["Hidratos de carbono", "[[g]]", ""],
+        ["   Azúcares", "[[g]]", ""],
+        ["Sodio", "[[mg]]", ""],
+        ["Colágeno hidrolizado", "[[g]]", "*"],
+        ["Magnesio", "[[mg]]", "[[%]]"],
+        ["Ácido hialurónico", "[[mg]]", "*"]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "Colágeno hidrolizado ([[origen: bovino / porcino / marino]]), [[fuente de magnesio]], ácido hialurónico.",
+      "modo": "Disolver [[g]] ([[n]] cucharada medidora) en un vaso de agua o en su bebida favorita, una vez al día.",
+      "precauciones": "Si está embarazada o en lactancia, o tiene alguna condición de salud, consulte a su médico."
+    },
+    {
+      "id": "07-colageno-plus",
+      "handle": "regenerador-cartilagos-y-ligamentos-naturalezam-250-grs",
+      "formato": "bolsa", "ancho": 240, "alto": 150,
+      "tema": { "fondo": "#0b1f3a", "fondo2": "#1565c0", "panel": "#ffffff", "acento": "#ff7a18", "acento2": "#4fc3f7", "titulo": "#ffffff", "tinta": "#0b1f3a", "motivo": "orbitas", "estilo": "condensada" },
+      "cinta": "SUPLEMENTO ALIMENTICIO",
+      "nombre": "Colágeno Plus",
+      "subnombre": "Fórmula en polvo",
+      "linea_extra": "Colágeno con [[nutrientes de la fórmula]]",
+      "nota_nombre": "Antes Regenerador de Cartílagos y Ligamentos",
+      "denominacion": "Suplemento alimenticio en polvo a base de colágeno [[y demás ingredientes]]",
+      "contenido": "Contenido neto: [[250 g / 500 g]]",
+      "porcion": "[[g]]", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Contenido energético", "[[kcal]]", ""],
+        ["Proteínas", "[[g]]", ""],
+        ["Grasas totales", "[[g]]", ""],
+        ["Hidratos de carbono", "[[g]]", ""],
+        ["   Azúcares", "[[g]]", ""],
+        ["Sodio", "[[mg]]", ""],
+        ["Colágeno", "[[g]]", "*"],
+        ["[[Otros ingredientes activos]]", "[[ ]]", ""]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "Colágeno ([[origen]]), [[lista completa en orden decreciente]].",
+      "modo": "Disolver [[g]] en un vaso de agua o jugo, una vez al día.",
+      "precauciones": "Si está embarazada o en lactancia, o tiene alguna condición de salud, consulte a su médico."
+    },
+    {
+      "id": "08-clorofila",
+      "handle": "clorofila-naturalezam-500ml",
+      "formato": "envolvente", "ancho": 200, "alto": 90,
+      "tema": { "fondo": "#1b5e20", "fondo2": "#7cb342", "panel": "#fbfbef", "acento": "#c62828", "acento2": "#c5e1a5", "titulo": "#43a047", "tinta": "#163d18", "motivo": "hojas", "estilo": "script" },
+      "nombre": "Clorofila",
+      "subnombre": "Clorofila líquida",
+      "linea_extra": "Para preparar bebida verde",
+      "denominacion": "Suplemento alimenticio líquido de clorofila",
+      "contenido": "Contenido neto: 500 mL",
+      "porcion": "[[mL]]", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Contenido energético", "[[kcal]]", ""],
+        ["Clorofila [[tipo, p. ej. clorofilina sódica cúprica]]", "[[mg]]", "*"],
+        ["Sodio", "[[mg]]", ""]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "Agua, [[clorofila / clorofilina]], [[saborizante]], [[conservador]].",
+      "modo": "Diluir [[mL]] en un vaso de agua (250 mL). Agítese antes de usarse.",
+      "precauciones": "Puede pigmentar temporalmente la lengua y las heces. Si está embarazada o en lactancia, consulte a su médico. Una vez abierto, consérvese en refrigeración [[confirmar]]."
+    },
+    {
+      "id": "09-l-arginina",
+      "handle": "l-arginina-100-caps",
+      "formato": "envolvente", "ancho": 170, "alto": 65,
+      "tema": { "fondo": "#0d1b3e", "fondo2": "#16306b", "panel": "#f4f6fb", "acento": "#ffa000", "acento2": "#ffd54f", "titulo": "#ffffff", "tinta": "#0d1b3e", "motivo": "molecula", "estilo": "condensada" },
+      "nombre": "L-Arginina",
+      "subnombre": "Aminoácido",
+      "linea_extra": "1000 mg por porción",
+      "denominacion": "Suplemento alimenticio de L-arginina",
+      "contenido": "Contenido neto: 100 cápsulas de [[mg]] c/u",
+      "porcion": "[[n]] cápsula(s)", "porciones": "[[n]]",
+      "nutrimental": [
+        ["L-arginina", "1000 mg", "*"]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "L-arginina [[clorhidrato / base]], [[excipientes]]. Cápsula: [[gelatina, colorante]].",
+      "modo": "Tomar [[n]] cápsula(s) al día con un vaso de agua.",
+      "precauciones": "Si toma medicamentos para la presión o el corazón, está embarazada o en lactancia, consulte a su médico."
+    },
+    {
+      "id": "10-spirulina",
+      "handle": "alga-spirulina",
+      "formato": "envolvente", "ancho": 170, "alto": 65,
+      "tema": { "fondo": "#9ea3a6", "fondo2": "#e6e8e9", "panel": "#f7f8f8", "acento": "#2e7d32", "acento2": "#66bb6a", "titulo": "#1b3d2f", "tinta": "#1b2a24", "motivo": "alga", "estilo": "condensada" },
+      "nombre": "Spirulina",
+      "subnombre": "Alga verde-azul",
+      "linea_extra": "Arthrospira platensis",
+      "denominacion": "Suplemento alimenticio de alga espirulina",
+      "contenido": "Contenido neto: 90 cápsulas de 500 mg c/u",
+      "porcion": "[[n]] cápsula(s)", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Espirulina (Arthrospira platensis)", "[[mg]]", "*"],
+        ["Proteínas", "[[g]]", ""],
+        ["Hierro", "[[mg]]", "[[%]]"]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "Espirulina (Arthrospira platensis) en polvo, [[excipientes]]. Cápsula: [[gelatina / vegetal]].",
+      "modo": "Tomar [[n]] cápsula(s) al día con un vaso de agua.",
+      "precauciones": "Si tiene alguna enfermedad autoinmune, fenilcetonuria, está embarazada o en lactancia, o toma medicamentos, consulte a su médico."
+    },
+    {
+      "id": "11-melatonina",
+      "handle": "melantonina-10mg-c-30-gomitas",
+      "formato": "envolvente", "ancho": 170, "alto": 65,
+      "tema": { "fondo": "#2a1b5c", "fondo2": "#5b3fa0", "panel": "#f6f2ff", "acento": "#ffd54f", "acento2": "#b388ff", "titulo": "#ffffff", "tinta": "#2a1b5c", "motivo": "luna", "estilo": "slab" },
+      "nombre": "Melatonina",
+      "subnombre": "Gomitas sabor uva",
+      "linea_extra": "Para adultos",
+      "denominacion": "Suplemento alimenticio de melatonina en gomitas sabor uva",
+      "contenido": "Contenido neto: 30 gomitas de [[g]] c/u ([[g]] total)",
+      "porcion": "[[n]] gomita(s)", "porciones": "[[n]]",
+      "nutrimental": [
+        ["Contenido energético", "[[kcal]]", ""],
+        ["Hidratos de carbono", "[[g]]", ""],
+        ["   Azúcares", "[[g]]", ""],
+        ["Sodio", "[[mg]]", ""],
+        ["Melatonina", "[[mg]]", "*"]
+      ],
+      "nota_tabla": "* VNR no establecido.",
+      "ingredientes": "[[Azúcar / jarabe de glucosa]], [[gelatina / pectina]], melatonina, [[saborizante uva]], [[colorante]], [[acidulante]].",
+      "modo": "Adultos: consumir [[n]] gomita(s) por la noche, 30 minutos antes de dormir.",
+      "precauciones": "Solo para adultos. No se consuma en embarazo o lactancia. Puede causar somnolencia: no conduzca ni opere maquinaria después de consumirlo. No se combine con alcohol ni con medicamentos para dormir."
+    }
+  ]
+}

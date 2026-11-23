@@ -1,0 +1,37 @@
+ETIQUETAS NATURALEZAM: ARCHIVOS EDITABLES PARA IMPRESIÓN
+=========================================================
+
+CONTENIDO
+- editables/   Un archivo PowerPoint (.pptx) por etiqueta, a tamaño real.
+- fuentes/     Tipografías que usan los archivos (licencia libre OFL).
+- referencia/  PDF de cada etiqueta, para comparar colores y acomodo.
+
+ANTES DE ABRIR
+1. Instala TODAS las fuentes de la carpeta "fuentes": doble clic en cada
+   archivo .ttf y luego "Instalar". Si no las instalas, PowerPoint las
+   sustituye y los textos se mueven.
+2. Abre el .pptx en PowerPoint, Keynote o Google Slides. También se puede
+   subir a Canva.
+
+MEDIDAS Y SANGRADO
+- Cada archivo tiene 3 mm de SANGRADO por lado. Ejemplo: la etiqueta de
+  170 x 65 mm viene en una página de 176 x 71 mm. El corte va 3 mm hacia
+  adentro de cada borde.
+- Las medidas son estimadas. Confírmalas con el envase y el suaje real
+  antes de imprimir.
+- En las notas de cada archivo están la medida final y la medida del
+  espacio para la tabla.
+
+QUÉ SE EDITA
+- Todos los textos son editables.
+- El recuadro punteado "ESPACIO PARA TABLA NUTRIMENTAL" se reemplaza por
+  la tabla (imagen, tabla o PDF pegado) del mismo tamaño.
+- Los textos en MAGENTA con fondo rosa son datos pendientes: hay que
+  completarlos y ponerlos del mismo color que el texto de alrededor.
+  No imprimir ninguna etiqueta con texto magenta.
+- El arte de fondo (colores, hojas, ilustraciones, recuadros) es una
+  imagen de 480 ppp y va detrás de los textos.
+- LOTE y CAD. van vacíos: se imprimen con inkjet en la línea de envasado.
+
+PARA IMPRIMIR
+PowerPoint: Archivo > Exportar > PDF, calidad máxima (no "tamaño mínimo").

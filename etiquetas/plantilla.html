@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Etiqueta Naturalezam</title>
+<link rel="stylesheet" href="fuentes/fuentes.css">
+<style>
+  /* Medidas reales: 1 unidad = 1 mm. El tamaño de página lo pone generar.mjs */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+  .etiqueta {
+    position: relative; overflow: hidden;
+    width: calc(var(--w) * 1mm); height: calc(var(--h) * 1mm);
+    display: grid; font-family: 'Roboto Condensed', 'Liberation Sans', sans-serif; color: var(--tinta);
+  }
+  .etiqueta.envolvente { grid-template-columns: 1fr 1.5fr 1fr; }
+  .etiqueta.bolsa { grid-template-columns: 1fr 1fr; }
+
+  /* ---------- Panel principal ---------- */
+  .principal {
+    position: relative; overflow: hidden;
+    background: radial-gradient(120% 90% at 50% 35%, var(--fondo2) 0%, var(--fondo) 70%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 3.2mm 3mm;
+  }
+  .motivo { position: absolute; inset: 0; pointer-events: none; }
+  .motivo svg { width: 100%; height: 100%; display: block; }
+
+  .tarjeta {
+    position: relative; z-index: 2; width: 100%; max-height: 100%;
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 1.1mm; padding: 2.4mm 2.6mm 2.2mm;
+    background: var(--panel); border-radius: 3.2mm;
+    border: .7mm solid var(--acento);
+    box-shadow: 0 0 0 .5mm var(--panel), 0 1.2mm 3mm rgba(0,0,0,.25);
+  }
+  .sin-tarjeta .tarjeta { background: transparent; border: none; box-shadow: none; color: #fff; }
+
+  .logo { display: flex; flex-direction: column; align-items: center; line-height: 1; }
+  .logo .marca { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900;
+    color: #2f7d32; letter-spacing: -.1mm; }
+  .sin-tarjeta .logo .marca { color: #fff; }
+  .logo svg { display: block; }
+
+  .tipo { font-weight: 800; letter-spacing: .35mm; text-transform: uppercase; color: var(--tinta); }
+  .sin-tarjeta .tipo { color: var(--acento2); }
+
+  .cinta {
+    font-weight: 800; letter-spacing: .3mm; text-transform: uppercase; color: #fff;
+    background: var(--acento); padding: .6mm 3mm; border-radius: .8mm;
+    clip-path: polygon(0 0, 100% 0, 97% 50%, 100% 100%, 0 100%, 3% 50%);
+  }
+  .sin-tarjeta .cinta, .acento-claro .cinta { color: var(--fondo); }
+
+  .nombre { color: var(--titulo); line-height: .92; white-space: nowrap; }
+  .estilo-slab .nombre { font-family: 'Alfa Slab One', serif;
+    text-shadow: .35mm .35mm 0 var(--acento2); }
+  .estilo-condensada .nombre { font-family: 'Bebas Neue', 'Oswald', sans-serif; letter-spacing: .3mm; }
+  .estilo-serif .nombre { font-family: 'Playfair Display', serif; font-style: italic; font-weight: 900; }
+  .estilo-script .nombre { font-family: 'Lobster Two', cursive; font-style: italic; font-weight: 700;
+    -webkit-text-stroke: .25mm var(--fondo); text-shadow: .5mm .5mm 0 var(--fondo); }
+
+  .subnombre { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .25mm; color: var(--tinta); }
+  .sin-tarjeta .subnombre { color: #fff; }
+  .estilo-script .subnombre { background: var(--acento); color: #fff; padding: .3mm 2.5mm; border-radius: .6mm; }
+  .extra { font-style: italic; color: var(--tinta); opacity: .9; }
+  .sin-tarjeta .extra { color: var(--acento2); opacity: 1; }
+
+  .contenido { margin-top: .6mm; font-weight: 800; color: var(--tinta);
+    border-top: .3mm solid currentColor; padding-top: .8mm; width: 100%; }
+  .sin-tarjeta .contenido { color: #fff; }
+
+  .sello {
+    position: absolute; z-index: 3; top: 2.4mm; right: 2.4mm; width: 13mm; height: 13mm; border-radius: 50%;
+    background: var(--acento2); color: #fff; display: grid; place-items: center; text-align: center;
+    font-family: 'Lobster Two', cursive; font-style: italic; font-weight: 700; font-size: 6.5pt; line-height: 1;
+    transform: rotate(12deg); box-shadow: 0 .6mm 1.5mm rgba(0,0,0,.3); padding: 1mm;
+  }
+
+  /* ---------- Paneles de información ---------- */
+  .info { position: relative; background: var(--panel); display: flex; flex-direction: column; overflow: hidden; }
+  .info::before { content: ""; display: block; height: 2.2mm; flex: none;
+    background: linear-gradient(90deg, var(--fondo), var(--fondo2)); }
+  .info .fit { flex: 1; overflow: hidden; padding: 1.6mm 2.2mm 1.8mm; font-size: 6.6pt; line-height: 1.18; }
+  .bolsa .reverso { display: grid; grid-template-columns: 1fr 1fr; background: var(--panel); position: relative; }
+  .bolsa .reverso::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2.2mm;
+    background: linear-gradient(90deg, var(--fondo), var(--fondo2)); }
+  .bolsa .reverso .fit { overflow: hidden; padding: 5mm 3.5mm 3.5mm; line-height: 1.2; }
+  .bolsa .reverso .fit + .fit { border-left: .25mm dashed rgba(0,0,0,.25); }
+
+  h3 { font-family: 'Oswald', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 1.12em;
+    letter-spacing: .15mm; color: var(--fondo); margin: 1.1mm 0 .4mm; }
+  .estilo-condensada h3, .tema-oscuro h3 { color: var(--tinta); }
+  h3:first-child { margin-top: 0; }
+  p { margin-bottom: .6mm; }
+
+  table.nut { width: 100%; border-collapse: collapse; border: .35mm solid var(--tinta); margin-bottom: .8mm; }
+  table.nut caption { caption-side: top; text-align: left; font-family: 'Oswald', sans-serif; font-weight: 700;
+    font-size: 1.25em; text-transform: uppercase; background: var(--tinta); color: var(--panel); padding: .4mm 1mm; }
+  table.nut td, table.nut th { padding: .2mm 1mm; border-bottom: .15mm solid rgba(0,0,0,.35); vertical-align: top; }
+  table.nut th { text-align: left; font-weight: 800; border-bottom: .5mm solid var(--tinta); }
+  table.nut td:nth-child(n+2), table.nut th:nth-child(n+2) { text-align: right; white-space: nowrap; }
+  table.nut .porcion td { font-weight: 700; border-bottom: .5mm solid var(--tinta); }
+  table.nut td.sub { padding-left: 2.6mm; }
+  .nota { font-size: .88em; opacity: .85; }
+
+  .leyendas { margin: .9mm 0; padding: .9mm 1.2mm; border: .35mm solid var(--tinta); border-radius: .8mm;
+    font-weight: 800; text-transform: uppercase; line-height: 1.15; }
+  .legal { font-size: .92em; }
+  .lote { display: flex; gap: 1.2mm; margin-top: 1mm; align-items: stretch; }
+  .lote .campos { flex: 1; border: .25mm solid var(--tinta); border-radius: .6mm; padding: .6mm 1mm; font-weight: 700; }
+  .lote .campos div + div { margin-top: .9mm; }
+  .barras { width: 20mm; min-height: 9mm; border: .25mm dashed var(--tinta); border-radius: .6mm;
+    display: grid; place-items: center; text-align: center; font-size: .85em; opacity: .75; }
+
+  /* Recuadro reservado para la tabla nutrimental (la coloca el cliente) */
+  .espacio-tabla { border: .35mm dashed var(--tinta); border-radius: .8mm; background: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;
+    margin-bottom: 1.2mm; color: var(--tinta); opacity: .9; }
+  .espacio-tabla b { font-weight: 800; text-transform: uppercase; letter-spacing: .2mm; }
+  .espacio-tabla span { font-size: .9em; }
+
+  /* Modo "solo fondo": arte sin textos, para el archivo editable */
+  .solo-fondo .etiqueta *, .solo-fondo .etiqueta *::before { color: transparent !important; text-shadow: none !important;
+    -webkit-text-stroke: 0 !important; }
+  .solo-fondo .pend { background: none !important; outline: none !important; }
+  .solo-fondo .espacio-tabla { visibility: hidden; }
+
+  /* Datos que faltan: resaltados para que no se impriman por error */
+  .pend { background: #ffe0f2; color: #c2006b; outline: .2mm dashed #e6007e; border-radius: .4mm; padding: 0 .4mm;
+    font-weight: 700; font-style: normal; text-transform: none; }
+
+  /* Guía de corte y pliegues (solo vista previa) */
+  .guias .principal, .guias .info, .guias .reverso { outline: .15mm dashed rgba(255,0,170,.55); outline-offset: -.08mm; }
+</style>
+</head>
+<body>
+<div id="raiz"></div>
+<script>
+// generar.mjs define window.__DATOS, espera las fuentes y llama a __renderizar()
+window.__renderizar = function () {
+  const { comun, producto: p, guias } = window.__DATOS;
+  const t = p.tema;
+
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  // [[texto]] -> marca de dato pendiente
+  const txt = s => esc(s).replace(/\[\[(.*?)\]\]/g, '<span class="pend">$1</span>');
+
+  const luminancia = hex => { const n = parseInt(hex.slice(1), 16);
+    const [r, g, b] = [n >> 16, (n >> 8) & 255, n & 255].map(v => { v /= 255; return v <= .03928 ? v / 12.92 : ((v + .055) / 1.055) ** 2.4; });
+    return .2126 * r + .7152 * g + .0722 * b; };
+  const sinTarjeta = luminancia(t.titulo) > .8;           // título blanco: va directo sobre el fondo
+  const temaOscuro = luminancia(t.fondo) < .08;
+  const acentoClaro = luminancia(t.acento) > .45;      // cinta clara: texto oscuro
+
+  /* ---------- Motivos ilustrados (vector, sin alusiones terapéuticas) ---------- */
+  const hoja = (x, y, r, s, c, o = 1) =>
+    `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})" opacity="${o}">
+       <path d="M0 0 C 6 -10 18 -12 26 -6 C 18 0 8 4 0 0 Z" fill="${c}"/>
+       <path d="M0 0 C 9 -5 17 -7 26 -6" stroke="rgba(255,255,255,.55)" stroke-width=".7" fill="none"/></g>`;
+  const ramita = (x, y, r, s, c, o) => [0, 1, 2, 3].map(i =>
+      hoja(x + i * 7 * s * Math.cos(r * Math.PI / 180), y + i * 7 * s * Math.sin(r * Math.PI / 180), r + (i % 2 ? 35 : -35), s * (1 - i * .12), c, o)).join('');
+  const motivos = {
+    hojas: (W, H) => ramita(-2, H * .15, 25, 1.1, t.acento2, .9) + ramita(W + 2, H * .85, 205, 1.1, t.acento2, .9)
+      + ramita(-2, H * .9, -20, .9, '#ffffff', .35) + ramita(W + 2, H * .1, 160, .9, '#ffffff', .35),
+    cristales: (W, H) => {
+      const c = (x, y, s, o) => `<g transform="translate(${x} ${y}) scale(${s})" opacity="${o}">
+        <path d="M0 -10 L7 -3 L4 10 L-4 10 L-7 -3 Z" fill="${t.acento2}"/><path d="M0 -10 L4 10 M-7 -3 L7 -3" stroke="#fff" stroke-width=".6" opacity=".6"/></g>`;
+      return c(W * .08, H * .2, 1, .8) + c(W * .92, H * .78, 1.3, .8) + c(W * .9, H * .18, .7, .55) + c(W * .1, H * .82, .8, .55)
+        + ramita(-2, H * .55, -10, .8, '#9be15d', .7) + ramita(W + 2, H * .45, 190, .8, '#9be15d', .7);
+    },
+    diana: (W, H) => [10, 7, 4].map((r, i) => `<circle cx="${W * .86}" cy="${H * .84}" r="${r}" fill="none" stroke="${i % 2 ? '#fff' : t.acento}" stroke-width="1.6" opacity=".8"/>`).join('')
+      + ramita(-2, H * .12, 20, 1, '#ffffff', .55) + ramita(-2, H * .92, -25, .9, '#c5e1a5', .8),
+    pez: (W, H) => `<g transform="translate(${W * .8} ${H * .83}) scale(1.1)" opacity=".95">
+        <path d="M-12 0 C -6 -6 6 -6 10 0 C 6 6 -6 6 -12 0 Z" fill="${t.acento2}"/><path d="M10 0 L16 -5 L15 0 L16 5 Z" fill="${t.acento2}"/>
+        <circle cx="-7" cy="-1" r=".9" fill="#fff"/></g>`
+      + `<path d="M0 ${H * .93} Q ${W * .25} ${H * .86} ${W * .5} ${H * .93} T ${W} ${H * .93} V ${H} H 0 Z" fill="${t.acento}" opacity=".9"/>`
+      + ramita(-2, H * .12, 25, .9, '#2e7d32', .8),
+    rayo: (W, H) => `<path d="M${W * .83} ${H * .08} L${W * .74} ${H * .5} L${W * .82} ${H * .5} L${W * .76} ${H * .92} L${W * .95} ${H * .4} L${W * .86} ${H * .4} L${W * .93} ${H * .08} Z" fill="#fff" opacity=".1"/>
+      <path d="M0 ${H * .78} L${W} ${H * .58} L${W} ${H * .66} L0 ${H * .86} Z" fill="${t.fondo2}" opacity=".9"/>`,
+    loto: (W, H) => { const pet = (r) => `<path transform="rotate(${r})" d="M0 0 C -3 -5 -3 -10 0 -14 C 3 -10 3 -5 0 0 Z" fill="${t.titulo}" opacity=".85"/>`;
+      return `<g transform="translate(${W * .5} ${H * .97}) scale(.8)">${[-60, -30, 0, 30, 60].map(pet).join('')}</g>`
+        + ramita(-2, H * .25, 15, 1, t.acento, .85) + ramita(W + 2, H * .25, 165, 1, t.acento, .85); },
+    gota: (W, H) => { const g = (x, y, s, o) => `<path transform="translate(${x} ${y}) scale(${s})" d="M0 -8 C 4 -2 6 1 6 4 A 6 6 0 0 1 -6 4 C -6 1 -4 -2 0 -8 Z" fill="${t.acento2}" opacity="${o}"/>`;
+      return g(W * .9, H * .2, 1.1, .7) + g(W * .1, H * .78, 1.3, .6) + g(W * .86, H * .82, .7, .5)
+        + ramita(-2, H * .2, 20, 1, t.acento, .9) + ramita(W + 2, H * .8, 200, 1, t.acento, .9); },
+    burbujas: (W, H) => [[.12, .14, 7], [.86, .2, 5], [.9, .7, 9], [.1, .75, 6], [.2, .9, 3.5], [.78, .9, 4]].map(([x, y, r]) =>
+      `<circle cx="${W * x}" cy="${H * y}" r="${r}" fill="${t.acento}" opacity=".55"/><circle cx="${W * x - r * .35}" cy="${H * y - r * .35}" r="${r * .3}" fill="#fff" opacity=".7"/>`).join('')
+      + `<path d="M0 ${H * .94} Q ${W * .5} ${H * .86} ${W} ${H * .94} V ${H} H 0 Z" fill="${t.acento2}" opacity=".9"/>`,
+    orbitas: (W, H) => `<g fill="none" stroke-width=".8">
+        <ellipse cx="${W * .72}" cy="${H * .3}" rx="${W * .45}" ry="${H * .12}" stroke="${t.acento2}" opacity=".45" transform="rotate(-18 ${W * .72} ${H * .3})"/>
+        <ellipse cx="${W * .3}" cy="${H * .8}" rx="${W * .45}" ry="${H * .1}" stroke="${t.acento}" opacity=".55" transform="rotate(12 ${W * .3} ${H * .8})"/></g>
+      <circle cx="${W * .85}" cy="${H * .16}" r="9" fill="${t.acento}" opacity=".35"/><circle cx="${W * .85}" cy="${H * .16}" r="4" fill="${t.acento}" opacity=".7"/>
+      <path d="M0 ${H} L${W} ${H * .82} L${W} ${H} Z" fill="${t.acento2}" opacity=".25"/>`,
+    molecula: (W, H) => { const n = [[.08, .15], [.17, .27], [.09, .4], [.88, .62], [.95, .78], [.84, .9]];
+      return `<path d="M${W * .78} 0 L${W} 0 L${W} ${H * .35} Z" fill="${t.acento}" opacity=".9"/><path d="M${W * .84} 0 L${W * .9} 0 L${W} ${H * .2} L${W} ${H * .3} Z" fill="${t.acento2}"/>`
+        + `<polyline points="${n.slice(0, 3).map(([x, y]) => `${W * x},${H * y}`).join(' ')}" stroke="${t.acento2}" stroke-width=".6" fill="none" opacity=".7"/>`
+        + `<polyline points="${n.slice(3).map(([x, y]) => `${W * x},${H * y}`).join(' ')}" stroke="${t.acento2}" stroke-width=".6" fill="none" opacity=".7"/>`
+        + n.map(([x, y]) => `<circle cx="${W * x}" cy="${H * y}" r="1.4" fill="${t.acento}"/>`).join(''); },
+    alga: (W, H) => { const a = (x, h, c, o) => `<path d="M${x} ${H} C ${x - 4} ${H - h * .4} ${x + 5} ${H - h * .6} ${x + 1} ${H - h} C ${x + 3} ${H - h * .6} ${x - 2} ${H - h * .4} ${x + 3} ${H} Z" fill="${c}" opacity="${o}"/>`;
+      return a(W * .78, H * .55, t.acento, .9) + a(W * .84, H * .7, t.acento2, .85) + a(W * .9, H * .45, t.acento, .8)
+        + a(W * .08, H * .4, t.acento2, .6) + a(W * .14, H * .3, t.acento, .5); },
+    luna: (W, H) => { const e = (x, y, s) => `<path transform="translate(${x} ${y}) scale(${s})" d="M0 -3 L.8 -.8 L3 0 L.8 .8 L0 3 L-.8 .8 L-3 0 L-.8 -.8 Z" fill="${t.acento}"/>`;
+      return `<path d="M${W * .86} ${H * .1} A 9 9 0 1 0 ${W * .86} ${H * .1 + 18} A 7 7 0 1 1 ${W * .86} ${H * .1} Z" fill="${t.acento}" opacity=".95"/>`
+        + e(W * .1, H * .14, 1) + e(W * .18, H * .3, .6) + e(W * .07, H * .62, .7) + e(W * .92, H * .6, .8) + e(W * .14, H * .88, .9) + e(W * .78, H * .9, .6)
+        + [[.86, .78, 3.2], [.9, .86, 2.8], [.82, .86, 2.8], [.86, .93, 2.4]].map(([x, y, r]) => `<circle cx="${W * x}" cy="${H * y}" r="${r}" fill="${t.acento2}" opacity=".85"/>`).join(''); }
+  };
+
+  const logoHojas = (c) => `<svg viewBox="0 0 40 9" style="width:13mm;height:2.9mm">
+      ${hoja(20, 8, -150, .32, c)}${hoja(20, 8, -30, .32, c)}${hoja(20, 8, -90, .3, '#7cb342')}
+      <path d="M8 8.4 Q 20 6 32 8.4" stroke="${c}" stroke-width=".6" fill="none"/></svg>`;
+
+  /* ---------- Bloques de texto ---------- */
+  const espacioTabla = () => `<div class="espacio-tabla"><b>Espacio para tabla nutrimental</b><span class="medida"></span></div>`;
+
+  const bloqueIzq = () => `${espacioTabla()}
+    <h3>Ingredientes</h3><p>${txt(p.ingredientes)}</p>
+    <p class="legal">${txt(comun.conservacion)}</p>
+    <p class="legal">${txt(comun.contacto)}</p>`;
+
+  const bloqueDer = () => `
+    <h3>Modo de empleo</h3><p>${txt(p.modo)} ${txt(comun.no_exceder)}</p>
+    <h3>Precauciones</h3><p>${txt(p.precauciones)}</p>
+    <div class="leyendas">${comun.leyendas.map(txt).join('<br>')}</div>
+    <p class="legal">${txt(comun.responsable)} ${txt(comun.fabricante)}. ${txt(comun.origen)}.</p>
+    <div class="lote"><div class="campos"><div>LOTE:</div><div>CAD.:</div></div><div class="barras">Código de barras<br>${'<span class="pend">EAN-13</span>'}</div></div>`;
+
+  const principal = () => `
+    <section class="principal">
+      <div class="motivo"><svg viewBox="0 0 100 100" preserveAspectRatio="none" id="lienzo"></svg></div>
+      ${p.sello ? `<div class="sello">${esc(p.sello)}</div>` : ''}
+      <div class="tarjeta">
+        <div class="logo">${logoHojas(sinTarjeta ? '#ffffff' : '#2f7d32')}<span class="marca" data-fs="10">Naturalezam</span></div>
+        ${p.cinta ? `<div class="cinta" data-fs="6.2">${esc(p.cinta)}</div>` : `<div class="tipo" data-fs="5.8">Suplemento alimenticio</div>`}
+        <div class="nombre" data-ajuste="1">${esc(p.nombre)}</div>
+        <div class="subnombre" data-fs="8">${txt(p.subnombre)}</div>
+        ${p.linea_extra ? `<div class="extra" data-fs="6.4">${txt(p.linea_extra)}</div>` : ''}
+        ${p.cinta && p.cinta !== 'SUPLEMENTO ALIMENTICIO' ? `<div class="tipo" data-fs="5.8">Suplemento alimenticio</div>` : ''}
+        <div class="contenido" data-fs="7">${txt(p.contenido)}</div>
+      </div>
+    </section>`;
+
+  const clases = ['etiqueta', p.formato, `estilo-${t.estilo}`, sinTarjeta ? 'sin-tarjeta' : '', temaOscuro ? 'tema-oscuro' : '', acentoClaro ? 'acento-claro' : '', guias ? 'guias' : ''].join(' ');
+  const vars = `--w:${p.ancho};--h:${p.alto};--fondo:${t.fondo};--fondo2:${t.fondo2};--panel:${t.panel};--acento:${t.acento};--acento2:${t.acento2};--titulo:${t.titulo};--tinta:${t.tinta}`;
+
+  document.getElementById('raiz').innerHTML = p.formato === 'bolsa'
+    ? `<div class="${clases}" style="${vars}">${principal()}
+         <section class="reverso"><div class="fit">${bloqueIzq()}</div><div class="fit">${bloqueDer()}</div></section></div>`
+    : `<div class="${clases}" style="${vars}">
+         <section class="info"><div class="fit">${bloqueIzq()}</div></section>${principal()}
+         <section class="info"><div class="fit">${bloqueDer()}</div></section></div>`;
+
+  /* ---------- Ajustes de tamaño ---------- */
+  const MM_PX = 96 / 25.4;
+  const pr = document.querySelector('.principal');
+  const anchoMm = pr.getBoundingClientRect().width / (96 / 25.4), altoMm = pr.getBoundingClientRect().height / (96 / 25.4);
+  const lienzo = document.getElementById('lienzo');
+  lienzo.setAttribute('viewBox', `0 0 ${anchoMm} ${altoMm}`);
+  lienzo.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+  lienzo.innerHTML = (motivos[t.motivo] || motivos.hojas)(anchoMm, altoMm);
+
+  // Escala tipográfica del panel principal según la altura de la etiqueta
+  const k = Math.min(altoMm / 60, anchoMm / 70);
+  document.querySelectorAll('[data-fs]').forEach(el => el.style.fontSize = (parseFloat(el.dataset.fs) * k) + 'pt');
+
+  const tarjeta = document.querySelector('.tarjeta');
+  const nombre = document.querySelector('.nombre');
+  const maxW = tarjeta.clientWidth - 6;
+  let fs = 34 * k; nombre.style.fontSize = fs + 'pt';
+  while ((nombre.scrollWidth > maxW || tarjeta.scrollHeight > pr.clientHeight - 6) && fs > 8) { fs -= .5; nombre.style.fontSize = fs + 'pt'; }
+
+  // Recuadro de la tabla: altura fija en mm según el formato
+  const espacio = document.querySelector('.espacio-tabla');
+  const fitIzq = espacio.closest('.fit');
+  const altoEspacio = Math.floor(fitIzq.clientHeight * (p.formato === 'bolsa' ? .56 : .52) / MM_PX);
+  espacio.style.height = altoEspacio + 'mm';
+
+  // Reduce el texto legal hasta que quepa, sin bajar de 5.5 pt
+  const avisos = [];
+  document.querySelectorAll('.fit').forEach((el, i) => {
+    let f = p.formato === 'bolsa' ? 9.5 : 6.6; el.style.fontSize = f + 'pt';   // la bolsa tiene más superficie
+    while (el.scrollHeight > el.clientHeight + 1 && f > 5.55) { f -= .1; el.style.fontSize = f.toFixed(1) + 'pt'; }
+    if (el.scrollHeight > el.clientHeight + 1) avisos.push(`Panel ${i + 1}: el texto no cabe ni a 5.5 pt`);
+    else if (f < 6) avisos.push(`Panel ${i + 1}: texto legal a ${f.toFixed(1)} pt (revisar legibilidad)`);
+  });
+  if (tarjeta.scrollHeight > pr.clientHeight) avisos.push('Panel principal: el contenido no cabe');
+  const anchoEspacio = Math.floor(espacio.getBoundingClientRect().width / MM_PX);
+  espacio.querySelector('.medida').textContent = `${anchoEspacio} × ${altoEspacio} mm`;
+
+  return { avisos, espacioTabla: `${anchoEspacio} × ${altoEspacio} mm`, pendientes: document.querySelectorAll('.pend').length, nombrePt: +fs.toFixed(1) };
+};
+// Devuelve cada bloque de texto con su caja (mm, relativa a la etiqueta) y sus tramos con estilo,
+// para reconstruirlos como cuadros de texto editables en PowerPoint.
+window.__extraer = function () {
+  const et = document.querySelector('.etiqueta');
+  const R = et.getBoundingClientRect();
+  const MM = 25.4 / 96;
+  const hex = c => { const m = c.match(/\d+(\.\d+)?/g); if (!m) return '000000';
+    return m.slice(0, 3).map(v => (+v).toString(16).padStart(2, '0')).join('').toUpperCase(); };
+  const estilo = el => { const cs = getComputedStyle(el);
+    return { familia: cs.fontFamily.split(',')[0].replace(/['"]/g, '').trim(), peso: +cs.fontWeight,
+      italica: cs.fontStyle === 'italic', pt: +(parseFloat(cs.fontSize) * .75).toFixed(2), color: hex(cs.color),
+      mayus: cs.textTransform === 'uppercase', espaciado: +(parseFloat(cs.letterSpacing) * .75 || 0).toFixed(2),
+      pendiente: !!el.closest('.pend') }; };
+  const caja = el => { const cs = getComputedStyle(el);
+    let r = el.getBoundingClientRect();
+    if (el.classList.contains('sello')) {   // caja sin rotar, centrada en el mismo punto
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      r = { left: cx - el.offsetWidth / 2, top: cy - el.offsetHeight / 2, width: el.offsetWidth, height: el.offsetHeight };
+    }
+    const pl = parseFloat(cs.paddingLeft), pr = parseFloat(cs.paddingRight), pt = parseFloat(cs.paddingTop), pb = parseFloat(cs.paddingBottom);
+    return { x: (r.left - R.left + pl) * MM, y: (r.top - R.top + pt) * MM, w: (r.width - pl - pr) * MM, h: (r.height - pt - pb) * MM }; };
+
+  const sel = '.marca, .tipo, .cinta, .nombre, .subnombre, .extra, .contenido, .sello, .fit h3, .fit > p, .leyendas, .lote .campos > div, .barras';
+  const bloques = [...et.querySelectorAll(sel)].map(el => {
+    const cs = getComputedStyle(el);
+    const tramos = [];
+    const recorrer = nodo => { for (const n of nodo.childNodes) {
+      if (n.nodeType === 3) { const e = estilo(n.parentElement); let t = n.textContent.replace(/\s+/g, ' ');
+        if (e.mayus) t = t.toUpperCase(); if (t) tramos.push({ texto: t, ...e }); }
+      else if (n.tagName === 'BR') tramos.push({ salto: true });
+      else if (n.nodeType === 1) recorrer(n); } };
+    recorrer(el);
+    // recortar espacios al inicio/fin de cada línea
+    for (let i = 0; i < tramos.length; i++) {
+      const prev = tramos[i - 1], sig = tramos[i + 1], t = tramos[i];
+      if (t.salto) continue;
+      if (!prev || prev.salto) t.texto = t.texto.replace(/^ /, '');
+      if (!sig || sig.salto) t.texto = t.texto.replace(/ $/, '');
+    }
+    const lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2;
+    const c = caja(el);
+    return { clase: el.className || el.tagName.toLowerCase(), ...c,
+      alinear: ['center', 'right'].includes(cs.textAlign) ? cs.textAlign : 'left',
+      interlineado: +(lh * .75).toFixed(2), unaLinea: el.getBoundingClientRect().height < lh * 1.6,
+      sombra: cs.textShadow !== 'none' ? cs.textShadow : null,
+      contorno: parseFloat(cs.webkitTextStrokeWidth) > 0 ? { mm: parseFloat(cs.webkitTextStrokeWidth) * MM, color: hex(cs.webkitTextStrokeColor) } : null,
+      rotacion: el.classList.contains('sello') ? 12 : 0,
+      centrarV: el.classList.contains('sello'),
+      tramos: tramos.filter(t => t.salto || t.texto) };
+  });
+  const esp = document.querySelector('.espacio-tabla');
+  return { ancho: R.width * MM, alto: R.height * MM, bloques,
+    espacioTabla: { ...caja(esp), tinta: hex(getComputedStyle(esp).color), medida: esp.querySelector('.medida').textContent } };
+};
+</script>
+</body>
+</html>
